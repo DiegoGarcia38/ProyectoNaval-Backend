@@ -1,13 +1,18 @@
 package com.ProyectoNaval.ProyectoNaval.controller;
 
-import com.ProyectoNaval.ProyectoNaval.model.Vessel;
-import com.ProyectoNaval.ProyectoNaval.service.TUGService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ProyectoNaval.ProyectoNaval.model.Vessel;
+import com.ProyectoNaval.ProyectoNaval.service.TUGService;
 
 @RestController
 @RequestMapping("/api/vessels/tugs")
+@CrossOrigin(origins = "*") // Permite todas las origins para desarrollo
 public class TUGControlador {
 
   @Autowired
@@ -20,9 +25,12 @@ public class TUGControlador {
   @GetMapping("/asd-tug-3212")
   public ResponseEntity<Vessel> getAsdTug3212() {
     try {
+      System.out.println("Request received for ASD Tug 3212"); // Log para debugging
       Vessel tugData = tugService.getAsdTug3212Data();
       return ResponseEntity.ok(tugData);
     } catch (Exception e) {
+      System.err.println("Error in getAsdTug3212: " + e.getMessage());
+      e.printStackTrace();
       return ResponseEntity.internalServerError().build();
     }
   }
@@ -46,90 +54,7 @@ public class TUGControlador {
       Vessel tugData = tugService.getAsdTug3212Data();
       return ResponseEntity.ok(tugData.getKeyFigures());
     } catch (Exception e) {
-      return ResponseEntity.internalServerError().build();
-    }
-  }
-
-  /**
-   * Endpoint para obtener solo las dimensiones del ASD Tug 3212
-   * GET /api/vessels/tugs/asd-tug-3212/dimensions
-   */
-  @GetMapping("/asd-tug-3212/dimensions")
-  public ResponseEntity<?> getAsdTug3212Dimensions() {
-    try {
-      Vessel tugData = tugService.getAsdTug3212Data();
-      return ResponseEntity.ok(tugData.getDimensions());
-    } catch (Exception e) {
-      return ResponseEntity.internalServerError().build();
-    }
-  }
-
-  /**
-   * Endpoint para obtener solo las performances del ASD Tug 3212
-   * GET /api/vessels/tugs/asd-tug-3212/performances
-   */
-  @GetMapping("/asd-tug-3212/performances")
-  public ResponseEntity<?> getAsdTug3212Performances() {
-    try {
-      Vessel tugData = tugService.getAsdTug3212Data();
-      return ResponseEntity.ok(tugData.getPerformances());
-    } catch (Exception e) {
-      return ResponseEntity.internalServerError().build();
-    }
-  }
-
-  /**
-   * Endpoint para obtener las capacidades del ASD Tug 3212
-   * GET /api/vessels/tugs/asd-tug-3212/capacities
-   */
-  @GetMapping("/asd-tug-3212/capacities")
-  public ResponseEntity<?> getAsdTug3212Capacities() {
-    try {
-      Vessel tugData = tugService.getAsdTug3212Data();
-      return ResponseEntity.ok(tugData.getCapacities());
-    } catch (Exception e) {
-      return ResponseEntity.internalServerError().build();
-    }
-  }
-
-  /**
-   * Endpoint para obtener las comparaciones con otros tugs
-   * GET /api/vessels/tugs/asd-tug-3212/comparisons
-   */
-  @GetMapping("/asd-tug-3212/comparisons")
-  public ResponseEntity<?> getAsdTug3212Comparisons() {
-    try {
-      Vessel tugData = tugService.getAsdTug3212Data();
-      return ResponseEntity.ok(tugData.getComparisonTugs());
-    } catch (Exception e) {
-      return ResponseEntity.internalServerError().build();
-    }
-  }
-
-  /**
-   * Endpoint para obtener las noticias del ASD Tug 3212
-   * GET /api/vessels/tugs/asd-tug-3212/news
-   */
-  @GetMapping("/asd-tug-3212/news")
-  public ResponseEntity<?> getAsdTug3212News() {
-    try {
-      Vessel tugData = tugService.getAsdTug3212Data();
-      return ResponseEntity.ok(tugData.getNewsArticles());
-    } catch (Exception e) {
-      return ResponseEntity.internalServerError().build();
-    }
-  }
-
-  /**
-   * Endpoint para obtener las imágenes del ASD Tug 3212
-   * GET /api/vessels/tugs/asd-tug-3212/images
-   */
-  @GetMapping("/asd-tug-3212/images")
-  public ResponseEntity<?> getAsdTug3212Images() {
-    try {
-      Vessel tugData = tugService.getAsdTug3212Data();
-      return ResponseEntity.ok(tugData.getImages());
-    } catch (Exception e) {
+      System.err.println("Error in getAsdTug3212KeyFigures: " + e.getMessage());
       return ResponseEntity.internalServerError().build();
     }
   }
@@ -141,5 +66,14 @@ public class TUGControlador {
   @GetMapping("/health")
   public ResponseEntity<String> healthCheck() {
     return ResponseEntity.ok("TUG Service is running!");
+  }
+
+  /**
+   * Endpoint de prueba para debugging
+   * GET /api/vessels/tugs/test
+   */
+  @GetMapping("/test")
+  public ResponseEntity<String> testEndpoint() {
+    return ResponseEntity.ok("TUG Controller is working! Current time: " + System.currentTimeMillis());
   }
 }

@@ -14,26 +14,25 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 public class HealthController {
 
-    @GetMapping("/health")
-    public Map<String, Object> health() {
-        Map<String, Object> response = new HashMap<>();
-        response.put("status", "UP");
-        response.put("timestamp", LocalDateTime.now());
-        response.put("service", "Proyecto Naval Backend");
-        response.put("version", "1.0.0");
-        response.put("platform", "Render.com");
-        return response;
-    }
-    
-    @GetMapping("/")
-    public Map<String, Object> welcome() {
-        Map<String, Object> response = new HashMap<>();
-        response.put("message", "Proyecto Naval API");
-        response.put("status", "Running");
-        response.put("endpoints", Map.of(
-            "health", "/api/health",
-            "vessels", "/api/vessels"
-        ));
-        return response;
-    }
+  @GetMapping("/health")
+  public Map<String, Object> health() {
+    Map<String, Object> response = new HashMap<>();
+    response.put("status", "UP");
+    response.put("timestamp", LocalDateTime.now());
+    response.put("service", "Proyecto Naval Backend");
+    response.put("version", "1.0.0");
+    response.put("platform", "Render.com");
+    return response;
+  }
+
+  @GetMapping("/")
+  public Map<String, Object> welcome() {
+    Map<String, Object> response = new HashMap<>();
+    response.put("message", "Proyecto Naval API");
+    response.put("status", "Running");
+    response.put("endpoints", Map.of(
+        "health", "/api/health",
+        "vessels", "/api/vessels"));
+    return response;
+  }
 }

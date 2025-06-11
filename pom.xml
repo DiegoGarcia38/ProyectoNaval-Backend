@@ -76,9 +76,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
+				<!-- <configuration>
 					<mainClass>com.ProyectoNaval.ProyectoNaval.ProyectoNavalApplication</mainClass>
-				</configuration>
+				</configuration> -->
 			</plugin>
 
 		</plugins>
