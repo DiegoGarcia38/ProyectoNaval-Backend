@@ -1,5 +1,5 @@
 # Etapa 1: compilación con Maven + JDK 21
-FROM maven:3.8.4-jdk-21 AS build
+FROM maven:3.9.8-eclipse-temurin-21 AS build
 WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline -B
