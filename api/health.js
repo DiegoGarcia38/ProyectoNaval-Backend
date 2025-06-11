@@ -14,4 +14,18 @@ export default function handler(req, res) {
     // Health check endpoint
     const healthStatus = {
       status: 'UP',
-      ti
+      timestamp: new Date().toISOString(),
+      service: 'Proyecto Naval Backend',
+      version: '1.0.0',
+      environment: process.env.NODE_ENV || 'production',
+      uptime: process.uptime()
+    };
+    
+    res.status(200).json(healthStatus);
+  } else {
+    res.status(405).json({ 
+      error: 'Method not allowed',
+      message: `${req.method} method is not supported on this endpoint`
+    });
+  }
+}
