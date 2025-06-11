@@ -9,16 +9,11 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "dest": "/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "/$1"
     }
-  ],
-  "functions": {
-    "src/main/java/com/proyectonaval/ProyectoNavalApplication.java": {
-      "runtime": "java21"
-    }
-  }
+  ]
 }
