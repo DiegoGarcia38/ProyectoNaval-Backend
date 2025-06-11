@@ -16,16 +16,15 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Etapa 2: Runtime
-FROM openjdk:17-jdk-slim
+FROM openjdk:21-jdk-slim
+RUN useradd -r -s /bin/false appuser
+USER appuser
 
 WORKDIR /app
 
 # Copiar JAR desde etapa de build
-COPY --from=build /app/target/*.jar app.jar
-
-# Crear usuario no-root para seguridad
-RUN useradd -r -s /bin/false appuser
-USER appuser
+COPY --from=build /app/target/ProyectoNaval-0.0.1-SNAPSHOT.jar /app/app.jar
+WORKDIR /app
 
 # Exponer puerto
 EXPOSE 8080
@@ -38,4 +37,4 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=60s --retries=3 \
   CMD curl -f http://localhost:8080/api/health || exit 1
 
 # Comando de inicio
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
