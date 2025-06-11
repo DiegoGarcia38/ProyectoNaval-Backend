@@ -1,5 +1,5 @@
 # Etapa 1: Build
-FROM maven:3.8.4-openjdk-17-slim AS build
+FROM maven:3.10.1-jdk-21-slim AS build
 
 WORKDIR /app
 
